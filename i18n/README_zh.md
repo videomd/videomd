@@ -2,7 +2,7 @@
 
 **给模型逐层读的视频拆解开放格式。**
 
-[English](../README.md) · 中文
+**[videomd.github.io/videomd/zh](https://videomd.github.io/videomd/zh/)** · [English](../README.md) · 中文
 
 每个技能有一个 `SKILL.md`，每条视频也有一个 `VIDEO.md`。
 

@@ -2,7 +2,7 @@
 
 **An open format for video breakdowns that models read layer by layer.**
 
-English · [中文](i18n/README_zh.md)
+**[videomd.github.io/videomd](https://videomd.github.io/videomd/)** · English · [中文](i18n/README_zh.md)
 
 Every skill has a `SKILL.md`. Every video gets a `VIDEO.md`.
 
