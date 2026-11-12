@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "videomd"
+version = "1.0.0"
+description = "VIDEO.md: an open format for video breakdowns that models read layer by layer. Reference reader and validator."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = ["PyYAML>=6.0", "jsonschema>=4.18"]
+keywords = ["video", "agents", "llm", "format", "specification", "breakdown"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+videomd = "videomd.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+videomd = ["videomd-1.schema.json"]
