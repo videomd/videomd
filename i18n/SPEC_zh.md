@@ -2,8 +2,6 @@
 
 > 本文是 [SPEC.md](../SPEC.md) 的中文版，两者不一致时以英文版为准。
 
-**第 1 版 · 草案。** 正式定稿前格式还可能变，改动记在 [CHANGELOG.md](../CHANGELOG.md)。读的一方和生成方应当检查 `videomd: 1`。
-
 本文定义 VIDEO.md 拆片包：一个目录，给模型和程序描述一条视频。它是什么、为什么这样设计，见 [README](README_zh.md) 和 [design_zh.md](design_zh.md)。怎么写一个包，见 [authoring_zh.md](authoring_zh.md)；怎么在 agent 或应用里用，见 [integrate_zh.md](integrate_zh.md)。
 
 「必须」「不得」「应当」「可以」对应 RFC 2119 的 MUST、MUST NOT、SHOULD、MAY。
@@ -265,4 +263,4 @@ videomd check path/to/package
 
 ## 11. 版本
 
-`videomd: 1` 是当前版本。增加可选的字段、键、主题文件或取值 id 时版本号不变，读的一方忽略不认识的内容。改变字段的含义、地图或时间线的语法、目录结构时升版本号。第 1 版还是草案，这类改动仍可能直接改在第 1 版里，记在 [CHANGELOG.md](../CHANGELOG.md)。
+`videomd: 1` 是当前版本。增加可选的字段、键、主题文件或取值 id 时版本号不变，读的一方忽略不认识的内容。改变字段的含义、地图或时间线的语法、目录结构时升版本号。

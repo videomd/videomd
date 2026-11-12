@@ -1,8 +1,6 @@
 # Changelog
 
-## Version 1, draft 2
-
-Package `videomd` 1.1.0.
+## 1.1.0
 
 - **Smaller required core.** A card needs `videomd`, `name`, `description`, `source`, `shots` and `lang`. `made_mix` is optional; in shot files only `shot`, `time` and `tokens` are required, and `inferred` is optional.
 - **Identity.** `source.sha256` (hash of the whole file) and `source.url`. `source` needs `duration` and at least one of `file` or `url`.
@@ -13,6 +11,6 @@ Package `videomd` 1.1.0.
 - `frames` may use names other than `sheet`, `first`, `last`.
 - New guides: [docs/integrate.md](docs/integrate.md) and [docs/authoring.md](docs/authoring.md).
 
-## Version 1, draft 1
+## 1.0.0
 
-Package `videomd` 1.0.0. First published version.
+First published version.

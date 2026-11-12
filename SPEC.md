@@ -1,7 +1,5 @@
 # VIDEO.md specification
 
-**Version 1 · draft.** The format may still change before it is marked final; changes are listed in [CHANGELOG.md](CHANGELOG.md). Readers and producers should check `videomd: 1`.
-
 This document defines the VIDEO.md package: a directory that describes one video for models and programs. For what it is and why, read the [README](README.md) and [docs/design.md](docs/design.md). For how to write one, [docs/authoring.md](docs/authoring.md); for how to use one in an agent or app, [docs/integrate.md](docs/integrate.md).
 
 The key words MUST, MUST NOT, SHOULD and MAY are used as in RFC 2119.
@@ -263,4 +261,4 @@ videomd check path/to/package
 
 ## 11. Versioning
 
-`videomd: 1` is this version. Adding optional fields, keys, topic files or taxonomy ids does not change it; readers ignore what they do not know. Changing the meaning of a field, the grammar of the map or the timeline, or the layout increases it. While version 1 is a draft, such changes may still be made to version 1 and are listed in [CHANGELOG.md](CHANGELOG.md).
+`videomd: 1` is this version. Adding optional fields, keys, topic files or taxonomy ids does not change it; readers ignore what they do not know. Changing the meaning of a field, the grammar of the map or the timeline, or the layout increases it.
