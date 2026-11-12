@@ -100,12 +100,44 @@ videomd check city-walk/
 
 前置信息给程序，正文给模型。
 
-- `camera`、`overlays` 和 `inferred` 里用 [取值表](taxonomy.md) 的 id。取值表以外的，用 `x-` id。
+- `camera`、`overlays`、`inferred`、`layers` 和 `transition_in` 里用 [取值表](taxonomy.md) 的 id。取值表以外的，用 `x-` id。
 - 如果你的工具不判断镜头怎么做的，就不要写 `inferred` 和 `made_mix`。不要拿猜测去填。
 - `decided_by` 设为最后拍板的那一方。如果是人改过的，就是 `human`，即使先看过的是模型。
 - `frames.sheet` 是最有用的图：一张图里放这一镜的第一帧、中间帧和最后一帧，模型看一张图就能核实一个镜头。
 
 正文依次写：看到的；推断的和依据；怎么复刻这一镜。「24 fps source, no sensor noise, letterboxed」这样的证据，能帮模型和复核的人判断结论对不对。
+
+## 长视频
+
+视频超过几百个镜头时，加上场景，并把时间线拆开：
+
+- 写 `video/scenes.md`，一行一个场景：`#S03 610.0-905.5 | shots 212-298 | story the chase through the market`。场景按顺序把每个镜头覆盖一次。讲座或直播的「场景」就是一章或一个环节。
+- 把时间线拆成 `video/timeline/01.md`、`02.md`……，一个场景一部分，`video/timeline.md` 里只留一段说明。每一部分都要在地图里列出来，带上大小。
+- 卡片里写 `scenes`，每个镜头文件里写 `scene`。
+
+这样模型先读场景列表（就算是一部长片也只有几千 token），再打开其中一部分时间线。
+
+## 长镜头
+
+一个十分钟甚至一小时的长镜头，对摄像机来说仍是一个镜头，对读的人来说不是。按内容把它拆成多行时间线，每行讲一件事，这些行对应的镜头文件写同一个 `take`。镜头内部读的人应该能找到的时刻，用 `beats` 标出来：产品出现、话题切换、抖包袱。
+
+## 多画面合成
+
+分屏、画中画、游戏画面叠摄像头、反应视频、主讲人抠像这类画面，在 `layers` 下列出每个画面层，写明 `region`、显示的内容，判断了制作方式的话也写上。时间线里用一个简短的 `layers` 值写同样的内容：`layers trailer full frame; webcam inset bottom right`。`inferred.made` 仍然是整个镜头的结论。
+
+## 运镜、转场和速度
+
+- 简单的镜头写一个 id 就够了：`camera: static`。
+- 再复杂一点就用运镜对象：先写 `rig`，再按顺序写每个运镜动作的 `type`、`direction`、`speed` 和 `time`。先停住、再向右甩镜、然后跟拍主体的镜头，就是三个运镜动作。
+- 不是直接硬切的转场，写在它接入的那一镜里：`transition_in: {type: whip, time: [19.6, 20.3]}`。它的时间可以从上一镜就开始。
+- 慢动作、延时、变速和倒放写在 `speed` 下，对焦和镜头效果写在 `lens` 下。
+- 描述画面上发生了什么。游戏或生成视频里的虚拟摄像机一样会摇、会环绕；把 `rig` 设为 `virtual`。
+- 测出来的写进这些字段；只是猜测的写在正文里，或者附上概率。
+
+## 台词和相关视频
+
+- 有台词稿的话，写成 WebVTT，用 `<v Speaker>` 标签标说话人，并在 `tracks.transcript` 里写明路径。文字版的概述还是放在 `content.md`。
+- 如果视频是别的视频的翻拍、其中一集、剪出来的片段，或者是重新上传的，在 `related` 里写明。
 
 ## 主题文件
 
