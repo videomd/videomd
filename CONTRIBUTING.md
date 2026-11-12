@@ -19,6 +19,7 @@ A pull request that changes [SPEC.md](SPEC.md) updates, together:
 - the schema in `schema/` and its copy in `src/videomd/`,
 - the validator, when a conformance rule changes,
 - a case in `conformance/valid/` or `conformance/invalid/` that shows the change,
+- [CHANGELOG.md](CHANGELOG.md),
 - the translations in `i18n/`, or a note in the pull request that they need updating.
 
 Run the tests:

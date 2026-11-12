@@ -31,11 +31,16 @@ def test_schema_copies_match():
 def test_read_gives_card_timeline_and_shots():
     pkg = videomd.read(ROOT / "conformance" / "valid" / "minimal")
     assert pkg["card"]["shots"] == 2 == len(pkg["timeline"]) == len(pkg["shots"])
-    assert pkg["timeline"][1]["made~"].startswith("code/template render(code_render)")
-    assert pkg["shots"][2]["inferred"]["made"] == "code_render"
+    assert [x["path"] for x in pkg["map"]] == ["video/timeline.md", "video/shots/*.md"]
+    assert pkg["timeline"][1] == {"shot": 2, "start": 5.0, "end": 8.0, "seen": "a shopfront with warm lights"}
+    assert "inferred" not in pkg["shots"][2]   # the production-method module is optional
+    full = videomd.read(ROOT / "conformance" / "valid" / "full")
+    assert full["shots"][2]["inferred"]["made"] == "x-game_capture" and full["map"][-1] == {"path": "frames/", "tokens": None, "about": "Shot frames · checking by eye"}
 
 
 def test_timeline_line_grammar():
     assert videomd.parse_timeline_line("#07 16.2-18.5 | seen red ring | made~ screen capture(screen_capture) 44%") == {
         "shot": 7, "start": 16.2, "end": 18.5, "seen": "red ring", "made~": "screen capture(screen_capture) 44%"}
     assert videomd.parse_timeline_line("## heading") is None
+    assert videomd.parse_map_line("video/shots/*.md | 570 | Per-shot detail") == {"path": "video/shots/*.md", "tokens": 570, "about": "Per-shot detail"}
+    assert videomd.parse_map_line("video/sound.md 956 Sound") is None

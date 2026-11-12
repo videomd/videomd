@@ -6,87 +6,87 @@ English · [中文](i18n/README_zh.md)
 
 Every skill has a `SKILL.md`. Every video gets a `VIDEO.md`.
 
-A `VIDEO.md` package describes one video: what it says, how each shot was made, what is on screen, what the sound is, and how to remake it. It starts with a card of about 150 tokens and opens up, level by level, down to a single shot. Every file says how many tokens it holds, and what was **seen** is always kept apart from what was **inferred**.
+A VIDEO.md package describes one video for AI agents and programs: what it shows and says, shot by shot, and, when the producer knows, how each shot was made and how to remake it. It starts with a small card and opens up level by level, down to a single shot. Every file says how many tokens it holds, and what was **seen** is kept apart from what was **inferred**.
+
+> **Status:** version 1, draft. The format may still change before it is marked final; see [CHANGELOG.md](CHANGELOG.md).
+
+## What a package looks like
 
 ```
 coffee-ad/
-  VIDEO.md            the card (front matter) + overview and map
+  VIDEO.md            the card + overview and map          read first
   video/
-    timeline.md       one line per shot
-    sound.md  …       one topic per file
-    shots/01.md       everything about one shot
-  frames/ …           raw data and media, as the producer likes
+    timeline.md       one line per shot                    read for questions about shots
+    sound.md  …       one topic per file                   read when the question is about it
+    shots/01.md       everything about one shot            read to check a shot
+  frames/ …           raw data and media                   for programs and image models
 ```
 
-## At a glance
-
-The card, at the top of `VIDEO.md`:
+The card, at the top of `VIDEO.md`, is all an agent needs to decide whether to open the package:
 
 ```yaml
 ---
 videomd: 1
 name: coffee-ad
-description: Mixed — filmed 70% + code-rendered text card 30%
-source: {file: coffee-ad.mp4, duration: 10.0, size: 1080x1920, fps: 30.0}
+description: >-
+  A 10-second coffee ad: a hand pours coffee into a glass, then a card shows the price.
+  Filmed product shot (70%) followed by a code-rendered price card (30%).
+source: {file: coffee-ad.mp4, sha256: 9f86d0…, duration: 10.0}
 shots: 2
-made_mix: {live_action: 0.7, code_render: 0.3}
-readers: [tools, model]
 lang: en
 ---
 ```
 
-The timeline, one shot per line. A key ending in `~` is inferred; the others are seen or measured:
+The timeline has one line per shot. A key ending in `~` is inferred; the others are seen or measured:
 
-````
-```videomd-timeline
-#01 0.0-7.0 | seen hand pours coffee into a glass cup | cam handheld | made~ filmed(live_action) 92%
-#02 7.0-10.0 | seen beige card with the price | cam static | over title | made~ code render(code_render) 61% · runner-up screen capture 30% | flag low confidence
 ```
-````
+#01 0.0-7.0 | seen hand pours coffee into a glass cup | camera handheld | made~ filmed 92%
+#02 7.0-10.0 | seen beige card with the price | overlay title | made~ code render 61% · runner-up screen capture 30% | flag low confidence
+```
 
 ## Why
 
-A breakdown's raw data runs to hundreds of thousands of tokens. A model that reads it for every question is slow, costly, and tends to repeat guesses as facts. With VIDEO.md:
+A full breakdown of one video runs to hundreds of thousands of tokens. A model that reads it for every question is slow, costly, and tends to repeat guesses as facts. With VIDEO.md:
 
-- **Most questions are answered from the card and the overview**, about 2k tokens. Adding the timeline, about 4k, covers questions about single shots.
-- **The cost is known before reading.** Every file and every row of the map gives its size in tokens.
-- **Seen and inferred are kept apart**, in the syntax (`made~`) and in the data (`inferred`, with a probability and `decided_by`).
-- **Programs get a stable surface**: front matter with a JSON Schema, a one-line-per-shot grammar, fixed ids. Unknown fields, keys and files are ignored, so the format can grow.
-
-More in [DESIGN.md](DESIGN.md): how it borrows from Agent Skills and small DSLs, and the reasons behind each decision.
+- **An agent can know about many videos at once.** Keep each card in context, a few hundred tokens apiece, and open a package only when it is needed, as with skills.
+- **Most questions are answered from the overview**, about 2k tokens. With the timeline, about 4k, questions about single shots are answered too.
+- **The cost is known before reading.** The map lists every file with its size in tokens.
+- **Seen and inferred are kept apart**, in the syntax (`made~`) and in the data (`inferred`, with a probability and who decided).
+- **Programs get a stable surface**: front matter checked by a JSON Schema, a one-line-per-shot grammar, fixed ids. Unknown fields, keys and files are ignored, so the format can grow.
+- **It starts small.** Six fields make a valid card. Judging how a video was made is an optional module, not a requirement.
 
 ## Documents
 
-- [SPEC.md](SPEC.md): the specification, version 1
-- [TAXONOMY.md](TAXONOMY.md): standard ids for production methods, camera, overlays, readers, flags
-- [DESIGN.md](DESIGN.md): why it looks the way it does
-- [schema/videomd-1.schema.json](schema/videomd-1.schema.json): JSON Schema for every front matter
-- [examples/](examples/): complete packages
-- [conformance/](conformance/): packages that conform, and packages that each break one rule
-- [IMPLEMENTATIONS.md](IMPLEMENTATIONS.md): tools that write or read VIDEO.md
+| | |
+|---|---|
+| [SPEC.md](SPEC.md) | The specification |
+| [docs/integrate.md](docs/integrate.md) | Using packages in an agent or app: discovery, context, loading, honest answers |
+| [docs/authoring.md](docs/authoring.md) | Writing packages: from the smallest valid one to a full one |
+| [docs/design.md](docs/design.md) | Why it looks the way it does: what it borrows from Agent Skills and small DSLs |
+| [TAXONOMY.md](TAXONOMY.md) | Standard ids: production methods, camera, overlays, readers, flags |
+| [schema/](schema/videomd-1.schema.json) | JSON Schema for every front matter |
+| [examples/](examples/) | Complete packages |
+| [conformance/](conformance/) | Packages that conform, and packages that each break one rule |
+| [IMPLEMENTATIONS.md](IMPLEMENTATIONS.md) | Tools that write or read VIDEO.md |
 
 ## Check and read a package
 
 ```bash
 pip install videomd
 videomd check path/to/package      # lists every rule it breaks; exit code 1 if any
-videomd read path/to/package       # card, timeline and shot data as JSON
+videomd read path/to/package       # card, map, timeline and shot data as JSON
 ```
 
 ```python
 import videomd
 
 errors = videomd.check("path/to/package")
-pkg = videomd.read("path/to/package")   # {"card": {...}, "timeline": [...], "shots": {1: {...}}}
+pkg = videomd.read("path/to/package")   # {"card": {...}, "map": [...], "timeline": [...], "shots": {1: {...}}}
 ```
-
-## For agents
-
-Read `VIDEO.md` first; most questions stop there. Read `video/timeline.md` for questions about shots, and look for `flag`. Open `video/shots/<n>.md` and its `frames` only to check one shot. Open topic files from the map when the question is about that topic. Leave raw data to programs.
 
 ## Contributing
 
-Proposals for new fields, keys or taxonomy ids are welcome as issues. See [CONTRIBUTING.md](CONTRIBUTING.md).
+Proposals for fields, keys and taxonomy ids are welcome as issues; see [CONTRIBUTING.md](CONTRIBUTING.md). If you build a tool that writes or reads VIDEO.md, add it to [IMPLEMENTATIONS.md](IMPLEMENTATIONS.md).
 
 ## License
 

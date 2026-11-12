@@ -1,7 +1,7 @@
 ---
 videomd: 1
-name: salted_egg
-description: 混合制作：3D 渲染 100%
+name: salted-egg
+description: 通过可爱的3D毛绒卡通角色与原理解释动画，趣味科普‘咸鸭蛋为什么会流油’的腌制科学原理。 制作方式（推断）：3D 渲染 100%
 source:
   file: salted_egg.mp4
   duration: 66.542
@@ -9,14 +9,14 @@ source:
   fps: 24.0
   aspect: '9:16'
 shots: 21
-confidence: 0.982
+lang: zh
 made_mix:
   cg_3d: 1.0
+confidence: 0.982
 readers:
 - tools
 - model
 open_questions: 0
-lang: zh
 generator:
   name: rea-video
   version: 0.1.0
@@ -36,23 +36,23 @@ generator:
 
 ## 地图
 
-先读本页；要细节时按下表只打开需要的文件。路径相对本目录。
+先读本页；要细节时只打开需要的文件。每行是 `路径 | 约 token | 里面有什么 · 什么时候读`，路径相对本目录。
 
-| 文件 | 里面有什么 | 什么时候读 | 约 token |
-|---|---|---|---|
-| `video/timeline.md` | 时间线：一行一个镜头 | 想知道某段讲什么、哪镜要复核、某镜怎么做 | 2049 |
-| `video/content.md` | 内容与结构 | 要讲什么、叙事线、结构时间轴、台词 | 1115 |
-| `video/cast.md` | 角色、场景与道具 | 做角色参考图、写首帧提示词 | 56 |
-| `video/sound.md` | 声音 | 人声、BGM、音效、节拍和来源 | 956 |
-| `video/look.md` | 拍法、打光与剪辑 | 有实拍镜头时：景别、机位、布光、器材 | 662 |
-| `video/remake.md` | 复刻方案 | 生成单元、拍摄场次、代码合成、要准备的真实素材 | 5698 |
-| `video/shots/01.md … 21.md` | 逐镜细节 | 核实某一镜：看得到的、推断和依据、提示词、帧图 | 570 |
-| `breakdown.json` | 完整原始数据 | 程序读取；模型一般不用打开 | 75712 |
-| `shots/` | 截图、分轨音频、字幕文件 | 看图核实、复刻时当参考 | — |
+```videomd-map
+video/timeline.md | 1986 | 时间线：一行一个镜头 · 想知道某段讲什么、哪镜要复核、某镜怎么做
+video/content.md | 1115 | 内容与结构 · 要讲什么、叙事线、结构时间轴、台词
+video/cast.md | 56 | 角色、场景与道具 · 做角色参考图、写首帧提示词
+video/sound.md | 956 | 声音 · 人声、BGM、音效、节拍和来源
+video/look.md | 662 | 拍法、打光与剪辑 · 有实拍镜头时：景别、机位、布光、器材
+video/remake.md | 5698 | 复刻方案 · 生成单元、拍摄场次、代码合成、要准备的真实素材
+video/shots/*.md | 570 | 逐镜细节，token 是每个文件的平均值 · 核实某一镜：看得到的、推断和依据、提示词、帧图
+breakdown.json | 75712 | 完整原始数据 · 程序读取；模型一般不用打开
+shots/ | - | 每镜的联系表和首尾帧 · 看图核实
+```
 
 ## 读法
 
 - 每行一个镜头：`#编号 起-止(秒) | 键 值 | …`。键后带 `~` 的是工具推断，不带的是画面里看得到或直接测得的。
-- `say` 在叙事里的作用和讲的点 · `seen` 画面里看到的 · `cam` 运镜 · `over` 叠加层 · `made~` 制作方式（推断）· `real~` 素材来源（推断）· `remake` 复刻路线 · `flag` 需要复核
+- `story` 在叙事里的作用和讲的点 · `seen` 画面里看到的 · `camera` 运镜 · `overlay` 叠加层 · `made~` 制作方式（推断）· `material~` 素材来源（推断）· `remake` 复刻路线 · `flag` 需要复核
 - 某一镜的全部细节在 `video/shots/编号.md`（如 `video/shots/07.md`）。
 - 「看到的」可以对着截图核实；「推断」是工具和看图模型的判断，依据写在每镜文件的「判断依据」里，两者对不上时以截图为准。

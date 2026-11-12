@@ -6,4 +6,4 @@
 
 Start at [salted-egg/VIDEO.md](salted-egg/VIDEO.md). The frames under `shots/` are downscaled to keep the repository small. `breakdown.json` is the producer's own raw data (L4); readers of the format do not need it.
 
-The minimal English package in [conformance/valid/minimal](../conformance/valid/minimal/) shows every required part in a few lines.
+Two small English packages written by hand: [conformance/valid/minimal](../conformance/valid/minimal/) has only what the spec requires; [conformance/valid/full](../conformance/valid/full/) uses every optional part, including extensions.
