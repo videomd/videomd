@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.svg">
-  <img src="assets/logo-light.svg" alt="VIDEO.md" width="300">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
+  <img src="docs/assets/logo-light.svg" alt="VIDEO.md" width="300">
 </picture>
 
 ### An open format for video breakdowns that models read layer by layer
@@ -10,10 +10,10 @@
 **Every skill has a `SKILL.md`. Every video gets a `VIDEO.md`.**
 
 [![PyPI](https://img.shields.io/pypi/v/videomd?color=3d4fd6&label=pypi)](https://pypi.org/project/videomd/)
-[![Spec](https://img.shields.io/badge/spec-version%201-3d4fd6)](SPEC.md)
+[![Spec](https://img.shields.io/badge/spec-version%201-3d4fd6)](docs/spec.md)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0%20%2B%20Apache--2.0-6e737d)](#license)
 
-[**Website**](https://videomd.github.io/videomd/) · [Specification](SPEC.md) · [Integrate](docs/integrate.md) · [Authoring](docs/authoring.md) · [中文](i18n/README_zh.md)
+[**Website**](https://videomd.github.io/videomd/) · [Specification](docs/spec.md) · [Integrate](docs/integrate.md) · [Authoring](docs/authoring.md) · [中文](README.zh-CN.md)
 
 </div>
 
@@ -22,8 +22,8 @@
 A VIDEO.md package describes one video for AI agents and programs: what it shows and says, shot by shot, and, when the producer knows, how each shot was made and how to remake it. It starts with a small card and opens up level by level, down to a single shot. Every file says how many tokens it holds, and what was **seen** is kept apart from what was **inferred**.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/levels-dark.svg">
-  <img src="assets/levels-light.svg" alt="Levels of a VIDEO.md package: L0 card, L1 overview and map, L2 timeline and topics, L3 one shot, L4 raw data" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/levels-dark.svg">
+  <img src="docs/assets/levels-light.svg" alt="Levels of a VIDEO.md package: L0 card, L1 overview and map, L2 timeline and topics, L3 one shot, L4 raw data" width="100%">
 </picture>
 
 ## At a glance
@@ -121,15 +121,15 @@ pkg = videomd.read("path/to/package")   # {"card": {...}, "map": [...], "timelin
 
 | | |
 |---|---|
-| [SPEC.md](SPEC.md) | The specification |
+| [docs/spec.md](docs/spec.md) | The specification |
 | [docs/integrate.md](docs/integrate.md) | Using packages in an agent or app |
 | [docs/authoring.md](docs/authoring.md) | Writing packages |
 | [docs/design.md](docs/design.md) | Why it looks the way it does: what it borrows from Agent Skills and small DSLs |
-| [TAXONOMY.md](TAXONOMY.md) | Standard ids: production methods, camera, overlays, readers, flags |
+| [docs/taxonomy.md](docs/taxonomy.md) | Standard ids: production methods, camera, overlays, readers, flags |
 | [schema/](schema/videomd-1.schema.json) | JSON Schema for every front matter |
 | [examples/](https://github.com/videomd/videomd/tree/main/examples/) | Complete packages |
 | [conformance/](https://github.com/videomd/videomd/tree/main/conformance/) | Packages that conform, and packages that each break one rule |
-| [IMPLEMENTATIONS.md](IMPLEMENTATIONS.md) | Tools that write or read VIDEO.md |
+| [docs/implementations.md](docs/implementations.md) | Tools that write or read VIDEO.md |
 | [CHANGELOG.md](CHANGELOG.md) | Changes by version |
 
 ## Implementations
@@ -139,7 +139,7 @@ pkg = videomd.read("path/to/package")   # {"card": {...}, "map": [...], "timelin
 | [rea-video](https://github.com/JuneYaooo/rea-video) | Writes packages: shot-level breakdown, production method per shot, sound, packaging, remake plan |
 | [videomd](https://github.com/videomd/videomd/tree/main/src/videomd/) | Reference reader and validator in this repository |
 
-Built something that writes or reads VIDEO.md? Add it to [IMPLEMENTATIONS.md](IMPLEMENTATIONS.md).
+Built something that writes or reads VIDEO.md? Add it to [docs/implementations.md](docs/implementations.md).
 
 ## Contributing
 

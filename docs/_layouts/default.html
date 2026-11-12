@@ -1,13 +1,14 @@
 <!doctype html>
 {%- assign zh = false -%}
-{%- if page.url contains '/i18n/' or page.url contains '/zh/' or page.lang == 'zh' -%}{%- assign zh = true -%}{%- endif -%}
-{%- assign here = page.url | remove_first: '/' | replace: 'index.html', '' -%}
-{%- assign twin = nil -%}
-{%- for item in site.data.nav -%}
-  {%- if item.en == here -%}{%- assign twin = item.zh -%}{%- endif -%}
-  {%- if item.zh == here -%}{%- assign twin = item.en -%}{%- endif -%}
-{%- endfor -%}
-{%- if twin == nil -%}{%- if zh -%}{%- assign twin = '' -%}{%- else -%}{%- assign twin = 'zh/' -%}{%- endif -%}{%- endif -%}
+{%- assign head = page.url | slice: 0, 4 -%}
+{%- if head == '/zh/' -%}{%- assign zh = true -%}{%- endif -%}
+{%- if zh -%}
+  {%- assign here = page.url | remove_first: '/zh/' -%}
+  {%- assign twin = page.url | remove_first: '/zh' -%}
+{%- else -%}
+  {%- assign here = page.url | remove_first: '/' -%}
+  {%- assign twin = page.url | prepend: '/zh' -%}
+{%- endif -%}
 <html lang="{% if zh %}zh-CN{% else %}en{% endif %}">
 <head>
   <meta charset="utf-8">
@@ -23,11 +24,11 @@
       <input type="checkbox" id="menu" class="menu-toggle" aria-label="Menu">
       <label for="menu" class="menu-button" aria-hidden="true">☰</label>
       <nav class="links">
-        {%- for item in site.data.nav offset: 1 -%}
-          {%- if zh -%}{%- assign href = item.zh -%}{%- assign label = item.zh_label -%}{%- else -%}{%- assign href = item.en -%}{%- assign label = item.en_label -%}{%- endif -%}
-          <a href="{{ '/' | append: href | relative_url }}"{% if href == here %} class="on"{% endif %}>{{ label }}</a>
+        {%- for item in site.data.nav -%}
+          {%- if zh -%}{%- assign href = '/zh/' | append: item.path -%}{%- assign label = item.zh -%}{%- else -%}{%- assign href = '/' | append: item.path -%}{%- assign label = item.en -%}{%- endif -%}
+          <a href="{{ href | relative_url }}"{% if item.path == here %} class="on"{% endif %}>{{ label }}</a>
         {%- endfor -%}
-        <a class="lang" href="{{ '/' | append: twin | relative_url }}">{% if zh %}English{% else %}中文{% endif %}</a>
+        <a class="lang" href="{{ twin | relative_url }}" hreflang="{% if zh %}en{% else %}zh-CN{% endif %}">{% if zh %}English{% else %}中文{% endif %}</a>
         <a class="gh" href="https://github.com/videomd/videomd">GitHub</a>
       </nav>
     </div>
@@ -39,7 +40,7 @@
     <div class="bar">
       <span>VIDEO.md · {% if zh %}第 1 版{% else %}version 1{% endif %}</span>
       <span>{% if zh %}规范和文档：CC BY 4.0 · 代码：Apache-2.0{% else %}Spec and docs: CC BY 4.0 · Code: Apache-2.0{% endif %}</span>
-      <a href="https://github.com/videomd/videomd/edit/main/{{ page.path }}">{% if zh %}在 GitHub 上编辑本页{% else %}Edit this page on GitHub{% endif %}</a>
+      <a href="https://github.com/videomd/videomd/edit/main/docs/{{ page.path }}">{% if zh %}在 GitHub 上编辑本页{% else %}Edit this page on GitHub{% endif %}</a>
     </div>
   </footer>
 </body>

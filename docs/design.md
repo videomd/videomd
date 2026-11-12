@@ -1,6 +1,6 @@
 # Why VIDEO.md looks the way it does
 
-[SPEC.md](../SPEC.md) says what a package contains. This page says why: the problem it solves, where the ideas come from, and the reasoning behind each decision.
+[SPEC.md](spec.md) says what a package contains. This page says why: the problem it solves, where the ideas come from, and the reasoning behind each decision.
 
 ## In one line
 

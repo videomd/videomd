@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../assets/logo-dark.svg">
-  <img src="../assets/logo-light.svg" alt="VIDEO.md" width="300">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
+  <img src="docs/assets/logo-light.svg" alt="VIDEO.md" width="300">
 </picture>
 
 ### 给模型逐层读的视频拆解开放格式
@@ -10,10 +10,10 @@
 **每个技能有一个 `SKILL.md`，每条视频也有一个 `VIDEO.md`。**
 
 [![PyPI](https://img.shields.io/pypi/v/videomd?color=3d4fd6&label=pypi)](https://pypi.org/project/videomd/)
-[![Spec](https://img.shields.io/badge/spec-version%201-3d4fd6)](SPEC_zh.md)
+[![Spec](https://img.shields.io/badge/spec-version%201-3d4fd6)](docs/zh/spec.md)
 [![License](https://img.shields.io/badge/license-CC%20BY%204.0%20%2B%20Apache--2.0-6e737d)](#许可)
 
-[**网站**](https://videomd.github.io/videomd/zh/) · [规范](SPEC_zh.md) · [接入指南](integrate_zh.md) · [生成指南](authoring_zh.md) · [English](../README.md)
+[**网站**](https://videomd.github.io/videomd/zh/) · [规范](docs/zh/spec.md) · [接入指南](docs/zh/integrate.md) · [生成指南](docs/zh/authoring.md) · [English](README.md)
 
 </div>
 
@@ -24,8 +24,8 @@
 可以这样理解：卡片是这条视频的身份证，一眼看清它是什么、怎么做的、有多确定；整个包是它的档案，要查哪一层就翻到哪一层，不用整本读完。
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../assets/levels-dark-zh.svg">
-  <img src="../assets/levels-light-zh.svg" alt="VIDEO.md 拆片包的层级：L0 卡片、L1 概览和地图、L2 时间线和主题、L3 单个镜头、L4 原始数据" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/levels-dark-zh.svg">
+  <img src="docs/assets/levels-light-zh.svg" alt="VIDEO.md 拆片包的层级：L0 卡片、L1 概览和地图、L2 时间线和主题、L3 单个镜头、L4 原始数据" width="100%">
 </picture>
 
 ## 一个包长什么样
@@ -115,24 +115,24 @@ errors = videomd.check("path/to/package")
 pkg = videomd.read("path/to/package")   # {"card": {...}, "map": [...], "timeline": [...], "shots": {1: {...}}}
 ```
 
-- **做 agent 或应用？** 读 [接入指南](integrate_zh.md)：怎么发现拆片包、往上下文里放什么、什么时候加载更多、怎么如实回答。
-- **做拆解工具？** 读 [生成指南](authoring_zh.md)：从最小的合格包到完整的包。
+- **做 agent 或应用？** 读 [接入指南](docs/zh/integrate.md)：怎么发现拆片包、往上下文里放什么、什么时候加载更多、怎么如实回答。
+- **做拆解工具？** 读 [生成指南](docs/zh/authoring.md)：从最小的合格包到完整的包。
 - **想看一个真实的包？** 打开 [examples/salted-egg/VIDEO.md](https://github.com/videomd/videomd/blob/main/examples/salted-egg/VIDEO.md)，21 个镜头。
 
 ## 文档
 
 | | |
 |---|---|
-| [规范](SPEC_zh.md) | 规范正文 |
-| [接入指南](integrate_zh.md) | 在 agent 或应用里用拆片包 |
-| [生成指南](authoring_zh.md) | 写拆片包 |
-| [设计思路](design_zh.md) | 为什么这样设计：借鉴了 Agent Skills 和小型 DSL 的哪些做法 |
-| [TAXONOMY.md](../TAXONOMY.md) | 标准 id：制作方式、运镜、叠加层、判断来源、标记 |
-| [schema/](../schema/videomd-1.schema.json) | 所有前置信息的 JSON Schema |
+| [规范](docs/zh/spec.md) | 规范正文 |
+| [接入指南](docs/zh/integrate.md) | 在 agent 或应用里用拆片包 |
+| [生成指南](docs/zh/authoring.md) | 写拆片包 |
+| [设计思路](docs/zh/design.md) | 为什么这样设计：借鉴了 Agent Skills 和小型 DSL 的哪些做法 |
+| [取值表](docs/zh/taxonomy.md) | 标准 id：制作方式、运镜、叠加层、判断来源、标记 |
+| [schema/](schema/videomd-1.schema.json) | 所有前置信息的 JSON Schema |
 | [examples/](https://github.com/videomd/videomd/tree/main/examples/) | 完整的拆片包 |
 | [conformance/](https://github.com/videomd/videomd/tree/main/conformance/) | 合格的包，以及各违反一条规则的包 |
-| [IMPLEMENTATIONS.md](../IMPLEMENTATIONS.md) | 生成和读取 VIDEO.md 的工具 |
-| [CHANGELOG.md](../CHANGELOG.md) | 各版本的改动 |
+| [实现列表](docs/zh/implementations.md) | 生成和读取 VIDEO.md 的工具 |
+| [CHANGELOG.md](CHANGELOG.md) | 各版本的改动 |
 
 ## 实现
 
@@ -141,11 +141,11 @@ pkg = videomd.read("path/to/package")   # {"card": {...}, "map": [...], "timelin
 | [rea-video](https://github.com/JuneYaooo/rea-video) | 生成拆片包：逐镜拆解、每镜的制作方式、声音、包装、复刻方案 |
 | [videomd](https://github.com/videomd/videomd/tree/main/src/videomd/) | 本仓库里的参考读取库和校验器 |
 
-做了生成或读取 VIDEO.md 的工具？欢迎加到 [IMPLEMENTATIONS.md](../IMPLEMENTATIONS.md)。
+做了生成或读取 VIDEO.md 的工具？欢迎加到 [实现列表](docs/zh/implementations.md)。
 
 ## 参与
 
-欢迎开 issue 提议新字段、新键和新的取值 id，见 [CONTRIBUTING.md](../CONTRIBUTING.md)。
+欢迎开 issue 提议新字段、新键和新的取值 id，见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 许可
 

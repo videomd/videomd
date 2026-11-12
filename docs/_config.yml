@@ -28,13 +28,5 @@ titles_from_headings:
 defaults:
   - scope: {path: ""}
     values: {layout: default}
-
-exclude:
-  - examples
-  - conformance
-  - src
-  - tests
-  - dist
-  - .venv
-  - pyproject.toml
-  - "*.egg-info"
+  - scope: {path: "zh"}
+    values: {lang: zh}

@@ -1,0 +1,6 @@
+# pages in the top bar; the Chinese page has the same path under zh/
+- {path: spec.html, en: Specification, zh: 规范}
+- {path: integrate.html, en: Integrate, zh: 接入}
+- {path: authoring.html, en: Authoring, zh: 生成}
+- {path: design.html, en: Design, zh: 设计}
+- {path: taxonomy.html, en: Taxonomy, zh: 取值表}

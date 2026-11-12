@@ -1,6 +1,6 @@
 # VIDEO.md specification
 
-This document defines the VIDEO.md package: a directory that describes one video for models and programs. For what it is and why, read the [README](README.md) and [docs/design.md](docs/design.md). For how to write one, [docs/authoring.md](docs/authoring.md); for how to use one in an agent or app, [docs/integrate.md](docs/integrate.md).
+This document defines the VIDEO.md package: a directory that describes one video for models and programs. For what it is and why, read the [README](https://github.com/videomd/videomd/blob/main/README.md) and [docs/design.md](design.md). For how to write one, [docs/authoring.md](authoring.md); for how to use one in an agent or app, [docs/integrate.md](integrate.md).
 
 The key words MUST, MUST NOT, SHOULD and MAY are used as in RFC 2119.
 
@@ -57,7 +57,7 @@ tokens: 2275
 
 `part` is `timeline`, `content`, `cast`, `sound`, `look`, `packaging`, `remake`, `shot`, or `x-<name>`. `tokens` is an estimate so a reader can decide before opening the file; producers MAY use any tokenizer. One that needs none: ASCII characters ÷ 4 + other characters × 0.75.
 
-The fields of each kind of front matter are defined by [schema/videomd-1.schema.json](schema/videomd-1.schema.json) (JSON Schema 2020-12): `card` for `VIDEO.md`, `part` for topic files, `shot` for shot files. Front matter MAY carry fields the schema does not define.
+The fields of each kind of front matter are defined by [schema/videomd-1.schema.json](https://github.com/videomd/videomd/blob/main/schema/videomd-1.schema.json) (JSON Schema 2020-12): `card` for `VIDEO.md`, `part` for topic files, `shot` for shot files. Front matter MAY carry fields the schema does not define.
 
 ## 4. The card (L0)
 
@@ -111,7 +111,7 @@ generator: {name: rea-video, version: 0.1.0}
 | `source.size`, `fps`, `aspect` | no | `WxH`, frames per second, aspect ratio such as `'9:16'` |
 | `shots` | yes | Number of shots; equals the number of timeline lines |
 | `lang` | yes | Language of the text written for models (BCP 47), e.g. `en`, `zh`, `pt-BR` |
-| `made_mix` | no | Production-method ids ([TAXONOMY.md](TAXONOMY.md)) to their share of the duration |
+| `made_mix` | no | Production-method ids ([TAXONOMY.md](taxonomy.md)) to their share of the duration |
 | `confidence` | no | 0–1, how sure the verdicts are overall |
 | `readers` | no | Who took part in the verdicts: `tools`, `model`, `agent`, `human` |
 | `open_questions` | no | Number of points that need a second look |
@@ -220,8 +220,8 @@ tokens: 572
 |---|---|---|
 | `shot` | yes | Shot number; equals the number in the file name |
 | `time` | yes | `[start, end]` in seconds |
-| `camera` | no | Camera id ([TAXONOMY.md](TAXONOMY.md)) |
-| `overlays` | no | Overlay ids ([TAXONOMY.md](TAXONOMY.md)) |
+| `camera` | no | Camera id ([TAXONOMY.md](taxonomy.md)) |
+| `overlays` | no | Overlay ids ([TAXONOMY.md](taxonomy.md)) |
 | `inferred` | no | The production-method verdict. When present, `made` (a method id) and `p` (its probability) are required |
 | `inferred.alternatives` | no | Other method ids to their probabilities |
 | `inferred.decided_by` | no | Who made the final call: `tools`, `model`, `agent` or `human` |
@@ -233,10 +233,10 @@ The body is Markdown for models. It SHOULD contain, in this order: what is seen,
 
 ## 9. Extensions
 
-- Production-method, camera, reader and flag ids outside [TAXONOMY.md](TAXONOMY.md) MUST start with `x-`, e.g. `x-game_capture`. A reader treats an id it does not know as unknown. Overlay ids are open and need no prefix.
+- Production-method, camera, reader and flag ids outside [TAXONOMY.md](taxonomy.md) MUST start with `x-`, e.g. `x-game_capture`. A reader treats an id it does not know as unknown. Overlay ids are open and need no prefix.
 - Producer-defined topic files are named `video/x-<name>.md` with `part: x-<name>`; producer-defined timeline keys are `x-<name>`.
 - A reader MUST ignore fields, keys, files and ids it does not know, and MUST NOT fail because of them.
-- An `x-` id used by more than one producer is a candidate for the taxonomy (see [CONTRIBUTING.md](CONTRIBUTING.md)).
+- An `x-` id used by more than one producer is a candidate for the taxonomy (see [CONTRIBUTING.md](https://github.com/videomd/videomd/blob/main/CONTRIBUTING.md)).
 
 ## 10. Conformance
 

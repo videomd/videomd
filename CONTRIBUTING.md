@@ -10,17 +10,17 @@ Open an issue that says:
 
 ## Taxonomy ids
 
-Before proposing a new id, try it as an `x-` id in your own packages. An `x-` id that more than one producer uses, or that a consumer needs, is the strongest case for adding it to [TAXONOMY.md](TAXONOMY.md).
+Before proposing a new id, try it as an `x-` id in your own packages. An `x-` id that more than one producer uses, or that a consumer needs, is the strongest case for adding it to [TAXONOMY.md](docs/taxonomy.md).
 
 ## Changes to the spec
 
-A pull request that changes [SPEC.md](SPEC.md) updates, together:
+A pull request that changes [SPEC.md](docs/spec.md) updates, together:
 
 - the schema in `schema/` and its copy in `src/videomd/`,
 - the validator, when a conformance rule changes,
 - a case in `conformance/valid/` or `conformance/invalid/` that shows the change,
 - [CHANGELOG.md](CHANGELOG.md),
-- the translations in `i18n/`, or a note in the pull request that they need updating.
+- the Chinese pages in `docs/zh/` and `README.zh-CN.md`, or a note in the pull request that they need updating.
 
 Run the tests:
 
