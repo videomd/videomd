@@ -148,6 +148,10 @@ pkg = videomd.read("path/to/package")   # {"card": {...}, "map": [...], "timelin
 
 欢迎开 issue 提议新字段、新键和新的取值 id，见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
+## 社区
+
+欢迎到 [LINUX DO](https://linux.do) 社区交流讨论。
+
 ## 许可
 
 规范和文档使用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)，代码、schema 和一致性测试文件使用 [Apache-2.0](https://github.com/videomd/videomd/blob/main/LICENSE)。

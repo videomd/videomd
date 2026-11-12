@@ -146,6 +146,10 @@ Built something that writes or reads VIDEO.md? Add it to [docs/implementations.m
 
 Proposals for fields, keys and taxonomy ids are welcome as issues; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Community
+
+Discuss VIDEO.md with the [LINUX DO](https://linux.do) community.
+
 ## License
 
 The specification and documents are under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The code, schema and conformance files are under [Apache-2.0](https://github.com/videomd/videomd/blob/main/LICENSE).
