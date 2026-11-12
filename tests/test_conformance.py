@@ -44,3 +44,25 @@ def test_timeline_line_grammar():
     assert videomd.parse_timeline_line("## heading") is None
     assert videomd.parse_map_line("video/shots/*.md | 570 | Per-shot detail") == {"path": "video/shots/*.md", "tokens": 570, "about": "Per-shot detail"}
     assert videomd.parse_map_line("video/sound.md 956 Sound") is None
+
+
+def test_long_film_reads_scenes_and_a_split_timeline():
+    pkg = videomd.read(ROOT / "conformance" / "valid" / "long-film")
+    assert [s["shots"] for s in pkg["scenes"]] == [[1, 4], [5, 6]]
+    assert [x["shot"] for x in pkg["timeline"]] == [1, 2, 3, 4, 5, 6]
+    assert pkg["shots"][5]["take"] == pkg["shots"][6]["take"] == 1
+    assert pkg["card"]["tracks"]["transcript"] == "video/transcript.vtt"
+
+
+def test_composite_layers_and_camera_moves():
+    pkg = videomd.read(ROOT / "conformance" / "valid" / "composite")
+    layers = pkg["shots"][1]["layers"]
+    assert [l["id"] for l in layers] == ["trailer", "webcam"] and layers[1]["made"] == "live_action"
+    assert [m["type"] for m in pkg["shots"][2]["camera"]["moves"]] == ["orbit", "whip_pan"]
+    assert pkg["shots"][3]["transition_in"]["type"] == "whip"
+
+
+def test_scene_line_grammar():
+    assert videomd.parse_scene_line("#S03 120.0-310.5 | shots 14-38 | story the chase") == {
+        "scene": 3, "start": 120.0, "end": 310.5, "shots": [14, 38], "story": "the chase"}
+    assert videomd.parse_scene_line("#S03 120.0-310.5 | story no shots") is None

@@ -96,6 +96,7 @@ A full breakdown of one video runs to hundreds of thousands of tokens. A model t
 | 🏷️ **Cost before reading** | The map lists every file with its size in tokens. |
 | 🔍 **Seen apart from inferred** | In the syntax (`made~`) and in the data (`inferred`, with a probability and who decided). |
 | 🧩 **A stable surface for programs** | Front matter checked by a JSON Schema, a one-line-per-shot grammar, fixed ids. Unknown fields, keys and files are ignored, so the format can grow. |
+| 🎬 **From a 6-second ad to a feature film** | Scenes and a split timeline for long videos, takes and beats for one-take streams, layers for split screens and reactions, camera moves and transitions for whip pans, orbits and match cuts. All optional. |
 | 🌱 **Starts small** | Six fields make a valid card. Judging how a video was made is an optional module, not a requirement. |
 
 ## Quick start

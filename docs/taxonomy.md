@@ -1,6 +1,6 @@
 # Taxonomy
 
-The standard ids used in VIDEO.md version 1. Ids outside these lists start with `x-` (see [specification](spec.md), section 9).
+The standard ids used in VIDEO.md version 1. Ids outside these lists start with `x-` (see [specification](spec.md), section 14).
 
 ## Production method
 
@@ -22,7 +22,7 @@ Used as `made_mix` keys, `inferred.made`, `inferred.alternatives` keys, and in p
 
 ## Camera
 
-Used as `camera` in shot files.
+Used as `camera` in shot files when it is a single id, and for each layer's `camera`. For several moves, a rig, directions or times, use a camera object (below).
 
 | Id | Meaning |
 |---|---|
@@ -32,6 +32,120 @@ Used as `camera` in shot files.
 | `handheld_like` | Handheld shake |
 | `smooth_move` | Smooth camera movement (dolly, gimbal, crane) |
 | `unknown` | Not measured |
+
+## Camera rig
+
+Used as `camera.rig` when `camera` is an object.
+
+| Id | Meaning |
+|---|---|
+| `tripod` | Fixed on a tripod or a stand |
+| `handheld` | Held in the hand |
+| `gimbal` | A stabiliser or Steadicam |
+| `dolly` | A dolly or slider on a track |
+| `crane` | A crane or jib |
+| `drone` | An aerial drone |
+| `fpv` | A first-person-view drone, flying fast and close |
+| `vehicle` | Mounted on a car, bike or other vehicle |
+| `screen` | A screen recording, no physical camera |
+| `virtual` | A virtual camera: 3D, game engine, generated video |
+| `unknown` | Not known |
+
+## Camera moves
+
+Used as `type` in `camera.moves`. A move MAY add `direction` (`left`, `right`, `up`, `down`, `in`, `out`, `cw`, `ccw`) and `speed` (`slow`, `medium`, `fast`).
+
+| Id | Meaning |
+|---|---|
+| `static` | No camera movement |
+| `pan` | Turns left or right on the spot |
+| `tilt` | Turns up or down on the spot |
+| `roll` | Rotates around the lens axis (`cw`, `ccw`) |
+| `push_in` | Moves towards the subject |
+| `pull_out` | Moves away from the subject |
+| `truck` | Moves sideways |
+| `pedestal` | Moves straight up or down |
+| `crane` | Rises or falls in an arc |
+| `orbit` | Circles around the subject (`cw`, `ccw`) |
+| `follow` | Follows a moving subject |
+| `zoom_in` / `zoom_out` | Changes focal length, the camera stays in place |
+| `crash_zoom` | A very fast zoom |
+| `dolly_zoom` | Moves and zooms in opposite directions: the subject stays, the background stretches |
+| `whip_pan` | A pan so fast the picture blurs |
+| `whip_tilt` | A tilt so fast the picture blurs |
+| `shake` | Deliberate shake, for impact |
+| `handheld_drift` | The small drift of a handheld camera |
+| `planar_zoom_pan` | The whole picture zooms or pans as a flat image |
+
+## Transitions
+
+Used as `transition_in.type`.
+
+| Id | Meaning |
+|---|---|
+| `cut` | A plain cut |
+| `jump_cut` | A cut within the same framing that skips time |
+| `match_cut` | A cut that matches shape, motion or position across the two shots |
+| `dissolve` | One shot fades into the next |
+| `fade_in` / `fade_out` / `fade_through` | From black or white, to it, or through it |
+| `wipe` | A line or shape sweeps one shot off and the next on |
+| `slide` | The next shot slides in and pushes the other out |
+| `whip` | A whip pan blurs one shot into the next |
+| `zoom` | A zoom carries one shot into the next |
+| `spin` | A rotation carries one shot into the next |
+| `mask` | An object passing the lens hides the cut |
+| `morph` | One image turns into the next |
+| `flash` | A flash of light covers the cut |
+| `glitch` | A digital-distortion effect covers the cut |
+| `l_cut` / `j_cut` | The sound of one shot runs over the picture of the next, or the other way round |
+
+## Layer roles
+
+Used as `role` in `layers`.
+
+| Id | Meaning |
+|---|---|
+| `base` | The main picture underneath |
+| `pip` | Picture-in-picture: a small window over the base |
+| `split` | One part of a split screen |
+| `inset` | A framed picture inside the layout, not floating over it |
+| `background` | Behind a keyed subject, for example a green-screen background |
+| `foreground` | A keyed subject in front of the background |
+| `overlay` | A full-frame layer over the base: a texture, a frame, a filter |
+
+## Lens
+
+Used in `lens`. The list is open.
+
+| Id | Meaning |
+|---|---|
+| `rack_focus` | Focus moves from one subject to another |
+| `shallow_focus` | Shallow depth of field, a blurred background |
+| `deep_focus` | Everything in focus |
+| `fisheye` | Strong barrel distortion |
+| `wide` | A wide-angle look |
+| `telephoto` | A long-lens, compressed look |
+| `tilt_shift` | A miniature look |
+| `anamorphic` | Anamorphic flares and oval bokeh |
+| `macro` | Extreme close-up |
+
+## Related videos
+
+Used as `rel` in `related`.
+
+| Id | This video is… |
+|---|---|
+| `same_video` | the same video, for example a re-upload |
+| `remake_of` | a remake of the other |
+| `part_of` | an episode or part of the other |
+| `clip_of` | cut from the other |
+| `source_of` | the source the other was cut or remade from |
+| `sequel_of` | a follow-up to the other |
+| `translation_of` | the other in another language |
+
+## Projection
+
+Used as `source.projection`: `flat` (the default), `equirectangular`, `cubemap`, `fisheye`.
 
 ## Overlays
 

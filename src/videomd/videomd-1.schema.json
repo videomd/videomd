@@ -4,105 +4,745 @@
   "title": "VIDEO.md front matter, version 1",
   "description": "Front matter of the files in a VIDEO.md package (SPEC.md). Unknown fields are allowed everywhere: readers ignore what they do not know. Ids starting with x- are producer extensions.",
   "$defs": {
-    "version": {"const": 1},
-    "ext": {"type": "string", "pattern": "^x-[a-z0-9][a-z0-9_-]*$"},
+    "version": {
+      "const": 1
+    },
+    "ext": {
+      "type": "string",
+      "pattern": "^x-[a-z0-9][a-z0-9_-]*$"
+    },
     "made": {
       "description": "How the base picture was made (TAXONOMY.md)",
       "anyOf": [
-        {"enum": ["live_action", "ai_video", "avatar", "cg_3d", "code_render", "screen_capture", "still_motion", "static_hold", "anim_2d", "stop_motion", "film_footage"]},
-        {"$ref": "#/$defs/ext"}
+        {
+          "enum": [
+            "live_action",
+            "ai_video",
+            "avatar",
+            "cg_3d",
+            "code_render",
+            "screen_capture",
+            "still_motion",
+            "static_hold",
+            "anim_2d",
+            "stop_motion",
+            "film_footage"
+          ]
+        },
+        {
+          "$ref": "#/$defs/ext"
+        }
       ]
     },
     "camera": {
       "anyOf": [
-        {"enum": ["static", "static_with_subject_motion", "planar_zoom_pan", "handheld_like", "smooth_move", "unknown"]},
-        {"$ref": "#/$defs/ext"}
+        {
+          "enum": [
+            "static",
+            "static_with_subject_motion",
+            "planar_zoom_pan",
+            "handheld_like",
+            "smooth_move",
+            "unknown"
+          ]
+        },
+        {
+          "$ref": "#/$defs/ext"
+        }
       ]
     },
-    "reader": {"anyOf": [{"enum": ["tools", "model", "agent", "human"]}, {"$ref": "#/$defs/ext"}]},
-    "flag": {"anyOf": [{"enum": ["uncertain", "disputed", "low_confidence"]}, {"$ref": "#/$defs/ext"}]},
-    "prob": {"type": "number", "minimum": 0, "maximum": 1},
-    "tokens": {"type": "integer", "minimum": 0},
-    "path": {"type": "string", "minLength": 1, "description": "Relative to the package root", "pattern": "^(?!/)(?!.*(^|/)\\.\\.(/|$))"},
-
+    "reader": {
+      "anyOf": [
+        {
+          "enum": [
+            "tools",
+            "model",
+            "agent",
+            "human"
+          ]
+        },
+        {
+          "$ref": "#/$defs/ext"
+        }
+      ]
+    },
+    "flag": {
+      "anyOf": [
+        {
+          "enum": [
+            "uncertain",
+            "disputed",
+            "low_confidence"
+          ]
+        },
+        {
+          "$ref": "#/$defs/ext"
+        }
+      ]
+    },
+    "prob": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Relative to the package root",
+      "pattern": "^(?!/)(?!.*(^|/)\\.\\.(/|$))"
+    },
     "card": {
       "type": "object",
-      "required": ["videomd", "name", "description", "source", "shots", "lang"],
+      "required": [
+        "videomd",
+        "name",
+        "description",
+        "source",
+        "shots",
+        "lang"
+      ],
       "properties": {
-        "videomd": {"$ref": "#/$defs/version"},
-        "name": {"type": "string", "pattern": "^[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?$", "description": "Lowercase letters, digits and hyphens; no leading, trailing or double hyphen"},
-        "description": {"type": "string", "minLength": 1, "maxLength": 1024, "description": "What the video is about, then how it was made. Written for an agent deciding whether to open the package"},
+        "videomd": {
+          "$ref": "#/$defs/version"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?$",
+          "description": "Lowercase letters, digits and hyphens; no leading, trailing or double hyphen"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024,
+          "description": "What the video is about, then how it was made. Written for an agent deciding whether to open the package"
+        },
         "source": {
           "type": "object",
-          "required": ["duration"],
-          "anyOf": [{"required": ["file"]}, {"required": ["url"]}],
+          "required": [
+            "duration"
+          ],
+          "anyOf": [
+            {
+              "required": [
+                "file"
+              ]
+            },
+            {
+              "required": [
+                "url"
+              ]
+            }
+          ],
           "properties": {
-            "file": {"type": "string", "minLength": 1},
-            "url": {"type": "string", "format": "uri"},
-            "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-            "duration": {"type": "number", "minimum": 0},
-            "size": {"type": "string", "pattern": "^\\d+x\\d+$"},
-            "fps": {"type": "number", "minimum": 0},
-            "aspect": {"type": "string"}
+            "file": {
+              "type": "string",
+              "minLength": 1
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "duration": {
+              "type": "number",
+              "minimum": 0
+            },
+            "size": {
+              "type": "string",
+              "pattern": "^\\d+x\\d+$"
+            },
+            "fps": {
+              "type": "number",
+              "minimum": 0
+            },
+            "aspect": {
+              "type": "string"
+            },
+            "projection": {
+              "enum": [
+                "flat",
+                "equirectangular",
+                "cubemap",
+                "fisheye"
+              ]
+            }
           }
         },
-        "shots": {"type": "integer", "minimum": 0},
-        "lang": {"type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]+)*$"},
-        "made_mix": {"type": "object", "propertyNames": {"$ref": "#/$defs/made"}, "additionalProperties": {"$ref": "#/$defs/prob"}},
-        "confidence": {"$ref": "#/$defs/prob"},
-        "readers": {"type": "array", "items": {"$ref": "#/$defs/reader"}, "uniqueItems": true},
-        "open_questions": {"type": "integer", "minimum": 0},
+        "shots": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lang": {
+          "type": "string",
+          "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]+)*$"
+        },
+        "made_mix": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/made"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/prob"
+          }
+        },
+        "confidence": {
+          "$ref": "#/$defs/prob"
+        },
+        "readers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reader"
+          },
+          "uniqueItems": true
+        },
+        "open_questions": {
+          "type": "integer",
+          "minimum": 0
+        },
         "generator": {
           "type": "object",
-          "required": ["name"],
-          "properties": {"name": {"type": "string", "minLength": 1}, "version": {"type": "string"}}
+          "required": [
+            "name"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": "string"
+            }
+          }
+        },
+        "scenes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tracks": {
+          "type": "object",
+          "properties": {
+            "transcript": {
+              "$ref": "#/$defs/path"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/path"
+          }
+        },
+        "related": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "rel"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "sha256"
+                ]
+              },
+              {
+                "required": [
+                  "url"
+                ]
+              },
+              {
+                "required": [
+                  "name"
+                ]
+              }
+            ],
+            "properties": {
+              "rel": {
+                "$ref": "#/$defs/rel"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "url": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },
-
     "part": {
       "type": "object",
-      "required": ["videomd", "part", "tokens"],
+      "required": [
+        "videomd",
+        "part",
+        "tokens"
+      ],
       "properties": {
-        "videomd": {"$ref": "#/$defs/version"},
-        "part": {"type": "string", "pattern": "^(x-)?[a-z][a-z0-9_]*$", "description": "timeline, content, cast, sound, look, packaging, remake; x-<name> for producer topics"},
-        "tokens": {"$ref": "#/$defs/tokens"},
-        "shots": {"type": "integer", "minimum": 0}
+        "videomd": {
+          "$ref": "#/$defs/version"
+        },
+        "part": {
+          "type": "string",
+          "pattern": "^(x-)?[a-z][a-z0-9_]*$",
+          "description": "timeline, scenes, content, cast, sound, look, packaging, remake; x-<name> for producer topics"
+        },
+        "tokens": {
+          "$ref": "#/$defs/tokens"
+        },
+        "shots": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scene": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "For a timeline part: the scene it covers"
+        },
+        "scenes": {
+          "type": "integer",
+          "minimum": 0
+        }
       },
-      "if": {"properties": {"part": {"const": "timeline"}}},
-      "then": {"required": ["shots"]}
+      "if": {
+        "properties": {
+          "part": {
+            "const": "timeline"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "shots"
+        ]
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "part": {
+                "const": "scenes"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "scenes"
+            ]
+          }
+        }
+      ]
     },
-
     "shot": {
       "type": "object",
-      "required": ["videomd", "part", "shot", "time", "tokens"],
+      "required": [
+        "videomd",
+        "part",
+        "shot",
+        "time",
+        "tokens"
+      ],
       "properties": {
-        "videomd": {"$ref": "#/$defs/version"},
-        "part": {"const": "shot"},
-        "shot": {"type": "integer", "minimum": 1},
-        "time": {"type": "array", "items": {"type": "number", "minimum": 0}, "minItems": 2, "maxItems": 2},
-        "camera": {"$ref": "#/$defs/camera"},
-        "overlays": {"type": "array", "items": {"type": "string"}, "uniqueItems": true,
-                     "description": "subtitle, title, label, styled_text, static_graphic, layout_template, animated_sticker, static_sticker, pip; open: more may be added"},
+        "videomd": {
+          "$ref": "#/$defs/version"
+        },
+        "part": {
+          "const": "shot"
+        },
+        "shot": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "time": {
+          "$ref": "#/$defs/time"
+        },
+        "camera": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/camera"
+            },
+            {
+              "$ref": "#/$defs/camera_object"
+            }
+          ]
+        },
+        "overlays": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "subtitle, title, label, styled_text, static_graphic, layout_template, animated_sticker, static_sticker, pip; open: more may be added"
+        },
         "inferred": {
           "type": "object",
-          "required": ["made", "p"],
+          "required": [
+            "made",
+            "p"
+          ],
           "properties": {
-            "made": {"$ref": "#/$defs/made"},
-            "p": {"$ref": "#/$defs/prob"},
-            "alternatives": {"type": "object", "propertyNames": {"$ref": "#/$defs/made"}, "additionalProperties": {"$ref": "#/$defs/prob"}},
-            "decided_by": {"$ref": "#/$defs/reader"},
-            "real_material": {"type": "boolean"}
+            "made": {
+              "$ref": "#/$defs/made"
+            },
+            "p": {
+              "$ref": "#/$defs/prob"
+            },
+            "alternatives": {
+              "type": "object",
+              "propertyNames": {
+                "$ref": "#/$defs/made"
+              },
+              "additionalProperties": {
+                "$ref": "#/$defs/prob"
+              }
+            },
+            "decided_by": {
+              "$ref": "#/$defs/reader"
+            },
+            "real_material": {
+              "type": "boolean"
+            }
           }
         },
-        "flags": {"type": "array", "items": {"$ref": "#/$defs/flag"}, "uniqueItems": true},
+        "flags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/flag"
+          },
+          "uniqueItems": true
+        },
         "frames": {
           "type": "object",
-          "properties": {"sheet": {"$ref": "#/$defs/path"}, "first": {"$ref": "#/$defs/path"}, "last": {"$ref": "#/$defs/path"}},
-          "additionalProperties": {"$ref": "#/$defs/path"}
+          "properties": {
+            "sheet": {
+              "$ref": "#/$defs/path"
+            },
+            "first": {
+              "$ref": "#/$defs/path"
+            },
+            "last": {
+              "$ref": "#/$defs/path"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/path"
+          }
         },
-        "tokens": {"$ref": "#/$defs/tokens"}
+        "tokens": {
+          "$ref": "#/$defs/tokens"
+        },
+        "scene": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "take": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Shots with the same take are one continuous camera take, split by content"
+        },
+        "beats": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "time",
+              "what"
+            ],
+            "properties": {
+              "time": {
+                "$ref": "#/$defs/time"
+              },
+              "what": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "transition_in": {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "$ref": "#/$defs/transition"
+            },
+            "time": {
+              "$ref": "#/$defs/time"
+            }
+          }
+        },
+        "speed": {
+          "type": "object",
+          "properties": {
+            "rate": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "ramp": {
+              "type": "boolean"
+            },
+            "reverse": {
+              "type": "boolean"
+            },
+            "freeze": {
+              "type": "boolean"
+            }
+          }
+        },
+        "lens": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "rack_focus, shallow_focus, deep_focus, fisheye, wide, telephoto, tilt_shift, anamorphic, macro; open"
+        },
+        "layers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9_-]*$"
+              },
+              "role": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "base",
+                      "pip",
+                      "split",
+                      "inset",
+                      "background",
+                      "foreground",
+                      "overlay"
+                    ]
+                  },
+                  {
+                    "$ref": "#/$defs/ext"
+                  }
+                ]
+              },
+              "region": {
+                "$ref": "#/$defs/region"
+              },
+              "seen": {
+                "type": "string"
+              },
+              "made": {
+                "$ref": "#/$defs/made"
+              },
+              "p": {
+                "$ref": "#/$defs/prob"
+              },
+              "real_material": {
+                "type": "boolean"
+              },
+              "camera": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/camera"
+                  },
+                  {
+                    "$ref": "#/$defs/camera_object"
+                  }
+                ]
+              }
+            }
+          }
+        }
       }
+    },
+    "time": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "[start, end] in seconds from the start of the video"
+    },
+    "rig": {
+      "anyOf": [
+        {
+          "enum": [
+            "tripod",
+            "handheld",
+            "gimbal",
+            "dolly",
+            "crane",
+            "drone",
+            "fpv",
+            "vehicle",
+            "screen",
+            "virtual",
+            "unknown"
+          ]
+        },
+        {
+          "$ref": "#/$defs/ext"
+        }
+      ]
+    },
+    "move_type": {
+      "anyOf": [
+        {
+          "enum": [
+            "static",
+            "pan",
+            "tilt",
+            "roll",
+            "push_in",
+            "pull_out",
+            "truck",
+            "pedestal",
+            "crane",
+            "orbit",
+            "follow",
+            "zoom_in",
+            "zoom_out",
+            "crash_zoom",
+            "dolly_zoom",
+            "whip_pan",
+            "whip_tilt",
+            "shake",
+            "handheld_drift",
+            "planar_zoom_pan"
+          ]
+        },
+        {
+          "$ref": "#/$defs/ext"
+        }
+      ]
+    },
+    "direction": {
+      "enum": [
+        "left",
+        "right",
+        "up",
+        "down",
+        "in",
+        "out",
+        "cw",
+        "ccw"
+      ]
+    },
+    "speed_word": {
+      "enum": [
+        "slow",
+        "medium",
+        "fast"
+      ]
+    },
+    "move": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/move_type"
+        },
+        "direction": {
+          "$ref": "#/$defs/direction"
+        },
+        "speed": {
+          "$ref": "#/$defs/speed_word"
+        },
+        "time": {
+          "$ref": "#/$defs/time"
+        }
+      }
+    },
+    "camera_object": {
+      "type": "object",
+      "properties": {
+        "rig": {
+          "$ref": "#/$defs/rig"
+        },
+        "moves": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/move"
+          }
+        }
+      }
+    },
+    "transition": {
+      "anyOf": [
+        {
+          "enum": [
+            "cut",
+            "jump_cut",
+            "match_cut",
+            "dissolve",
+            "fade_in",
+            "fade_out",
+            "fade_through",
+            "wipe",
+            "slide",
+            "whip",
+            "zoom",
+            "spin",
+            "mask",
+            "morph",
+            "flash",
+            "glitch",
+            "l_cut",
+            "j_cut"
+          ]
+        },
+        {
+          "$ref": "#/$defs/ext"
+        }
+      ]
+    },
+    "rel": {
+      "anyOf": [
+        {
+          "enum": [
+            "same_video",
+            "remake_of",
+            "part_of",
+            "clip_of",
+            "source_of",
+            "sequel_of",
+            "translation_of"
+          ]
+        },
+        {
+          "$ref": "#/$defs/ext"
+        }
+      ]
+    },
+    "region": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "minItems": 4,
+      "maxItems": 4,
+      "description": "[x, y, w, h] as fractions of the frame, origin top left"
     }
   }
 }

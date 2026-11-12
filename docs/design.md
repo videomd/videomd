@@ -119,6 +119,10 @@ What programs depend on is fixed: front matter fields, the timeline grammar, the
 
 So when a producer gets better (a new dimension of camera work, say), existing readers keep working.
 
+### It grows with the video
+
+A six-second ad and a two-hour film are the same format. The ad uses the card, a timeline and two shot files. The film adds a scene list, so a model reads a few thousand tokens before choosing where to look, and a timeline split by scene. A one-hour take is split by content into lines that share a `take`; a reaction video describes each part of the frame under `layers`; a shot that orbits and then whip-pans lists both moves in order. Each of these is optional and added only when the video needs it, so simple videos stay simple.
+
 ### Prose for models, ids for programs
 
 Timeline values are prose in the package's language: "screen capture 41%" or "屏幕录制 41%", because a model reads them. Stable ids such as `screen_capture` live in the front matter of shot files and in `made_mix`, and programs read only those. Each layer does one job, and neither has to be parsed out of the other.

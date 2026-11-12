@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "videomd"
-version = "1.1.0"
+version = "1.2.0"
 description = "VIDEO.md: an open format for video breakdowns that models read layer by layer. Reference reader and validator."
 readme = "README.md"
 requires-python = ">=3.10"

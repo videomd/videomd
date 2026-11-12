@@ -58,11 +58,16 @@ Add one instruction near the list, for example:
 |---|---|
 | What the video is, how it was made overall, whether to look closer | The card, already in context |
 | The story, the verdict, what is uncertain, what material to prepare | `VIDEO.md` body |
+| The parts of a long video, or a moment in one | `video/scenes.md` first, then the timeline part of that scene |
 | Which shot does what, which shots need a look, a moment in the video | `video/timeline.md` |
 | Sound, cast, packaging, how to remake it | The topic file the map names |
 | Whether one shot really is what the tools say | `video/shots/<n>.md` and the images in its `frames` |
 
 The map in `VIDEO.md` gives each file's size in tokens. Let the model use it: with a small budget, the `remake` field in the timeline may be enough instead of a 6k-token remake plan.
+
+**Long videos.** When the card has `scenes`, read `video/scenes.md` before the timeline, and open only the timeline part (`video/timeline/<n>.md`) or the lines of the scene the question is about. To answer "what is said at 41:20", use the transcript in `tracks.transcript` when there is one.
+
+**Composite pictures.** When a shot has `layers`, answer about the layer the question means: in a reaction video, "is this AI?" may be about the trailer, not the webcam.
 
 **Agents with a file system** (coding agents, desktop agents) need nothing more: they read the files by path.
 
