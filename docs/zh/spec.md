@@ -2,7 +2,7 @@
 
 > 本文是 [SPEC.md](../spec.md) 的中文版，两者不一致时以英文版为准。
 
-本文定义 VIDEO.md 拆片包：一个目录，给模型和程序描述一条视频。它是什么、为什么这样设计，见 [README](https://github.com/videomd/videomd/blob/main/README.zh-CN.md) 和 [design_zh.md](design.md)。怎么写一个包，见 [authoring_zh.md](authoring.md)；怎么在 agent 或应用里用，见 [integrate_zh.md](integrate.md)。
+本文定义 VIDEO.md 拆片包：一个目录，给模型和程序描述一条视频。它是什么、为什么这样设计，见 [README](https://github.com/videomd/videomd/blob/main/README.zh-CN.md) 和 [设计思路](design.md)。怎么写一个包，见 [生成指南](authoring.md)；怎么在 agent 或应用里用，见 [接入指南](integrate.md)。
 
 「必须」「不得」「应当」「可以」对应 RFC 2119 的 MUST、MUST NOT、SHOULD、MAY。
 
@@ -113,7 +113,7 @@ generator: {name: rea-video, version: 0.1.0}
 | `source.size`、`fps`、`aspect` | 否 | `宽x高`、帧率、画面比例（如 `'9:16'`） |
 | `shots` | 是 | 镜头数，等于时间线行数 |
 | `lang` | 是 | 写给模型读的文字所用的语言（BCP 47），如 `en`、`zh`、`pt-BR` |
-| `made_mix` | 否 | 制作方式 id（[TAXONOMY.md](taxonomy.md)）到它占时长的比例 |
+| `made_mix` | 否 | 制作方式 id（[取值表](taxonomy.md)）到它占时长的比例 |
 | `confidence` | 否 | 0–1，整体判断有多确定 |
 | `readers` | 否 | 谁参与了判断：`tools`、`model`、`agent`、`human` |
 | `open_questions` | 否 | 需要复核的点有几处 |
@@ -222,8 +222,8 @@ tokens: 572
 |---|---|---|
 | `shot` | 是 | 镜头编号；等于文件名里的编号 |
 | `time` | 是 | `[开始, 结束]`，单位秒 |
-| `camera` | 否 | 运镜 id（[TAXONOMY.md](taxonomy.md)） |
-| `overlays` | 否 | 叠加层 id（[TAXONOMY.md](taxonomy.md)） |
+| `camera` | 否 | 运镜 id（[取值表](taxonomy.md)） |
+| `overlays` | 否 | 叠加层 id（[取值表](taxonomy.md)） |
 | `inferred` | 否 | 制作方式的判断。有它时，`made`（制作方式 id）和 `p`（概率）是必须的 |
 | `inferred.alternatives` | 否 | 其他制作方式 id 到概率 |
 | `inferred.decided_by` | 否 | 最后由谁定的：`tools`、`model`、`agent` 或 `human` |
@@ -235,7 +235,7 @@ tokens: 572
 
 ## 9. 扩展
 
-- [TAXONOMY.md](taxonomy.md) 以外的制作方式、运镜、判断来源和标记 id 必须以 `x-` 开头，如 `x-game_capture`。读的一方遇到不认识的 id 当作未知处理。叠加层 id 是开放的，不需要前缀。
+- [取值表](taxonomy.md) 以外的制作方式、运镜、判断来源和标记 id 必须以 `x-` 开头，如 `x-game_capture`。读的一方遇到不认识的 id 当作未知处理。叠加层 id 是开放的，不需要前缀。
 - 生成方自定义的主题文件命名为 `video/x-<name>.md`，`part: x-<name>`；自定义的时间线键命名为 `x-<name>`。
 - 读的一方必须忽略不认识的字段、键、文件和 id，不得因为它们而出错。
 - 多个生成方都在用的 `x-` id，是取值表的候选（见 [CONTRIBUTING.md](https://github.com/videomd/videomd/blob/main/CONTRIBUTING.md)）。

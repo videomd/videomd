@@ -1,6 +1,6 @@
 # 编写 VIDEO.md 拆片包
 
-这篇写给开发视频拆解工具的人，以及手写拆片包的人。它从最小的合格包讲到完整的包，说明每一部分怎么写，模型才用得好。规则在 [SPEC_zh.md](spec.md) 里；这一页讲怎么写好。
+这篇写给开发视频拆解工具的人，以及手写拆片包的人。它从最小的合格包讲到完整的包，说明每一部分怎么写，模型才用得好。规则在 [规范](spec.md) 里；这一页讲怎么写好。
 
 ## 最小的拆片包
 
@@ -100,7 +100,7 @@ videomd check city-walk/
 
 前置信息给程序，正文给模型。
 
-- `camera`、`overlays` 和 `inferred` 里用 [TAXONOMY.md](taxonomy.md) 的 id。取值表以外的，用 `x-` id。
+- `camera`、`overlays` 和 `inferred` 里用 [取值表](taxonomy.md) 的 id。取值表以外的，用 `x-` id。
 - 如果你的工具不判断镜头怎么做的，就不要写 `inferred` 和 `made_mix`。不要拿猜测去填。
 - `decided_by` 设为最后拍板的那一方。如果是人改过的，就是 `human`，即使先看过的是模型。
 - `frames.sheet` 是最有用的图：一张图里放这一镜的第一帧、中间帧和最后一帧，模型看一张图就能核实一个镜头。
@@ -136,4 +136,4 @@ videomd check city-walk/
 - 标记指向的是需要复核的镜头。
 - 没有隐私信息：任何文件里，包括 L4 数据，都没有本地路径、账号名、API 地址或密钥。
 
-把你的工具加到 [IMPLEMENTATIONS.md](implementations.md)。
+把你的工具加到 [实现列表](implementations.md)。

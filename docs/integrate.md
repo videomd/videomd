@@ -1,6 +1,6 @@
 # Using VIDEO.md in an agent or app
 
-This guide is for people building agents, assistants and applications that answer questions about videos. It covers how to find packages, what to put in the model's context, when to load more, and how to keep the answers honest. The format itself is in [SPEC.md](spec.md).
+This guide is for people building agents, assistants and applications that answer questions about videos. It covers how to find packages, what to put in the model's context, when to load more, and how to keep the answers honest. The format itself is in [specification](spec.md).
 
 ## The idea
 

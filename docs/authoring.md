@@ -1,6 +1,6 @@
 # Writing VIDEO.md packages
 
-This guide is for people building tools that break videos down, and for anyone writing a package by hand. It goes through a package from the smallest valid one to a full one, and how to fill each part so that models use it well. The rules are in [SPEC.md](spec.md); this page is about doing it well.
+This guide is for people building tools that break videos down, and for anyone writing a package by hand. It goes through a package from the smallest valid one to a full one, and how to fill each part so that models use it well. The rules are in [specification](spec.md); this page is about doing it well.
 
 ## The smallest package
 
@@ -100,7 +100,7 @@ One line per shot, and the one L2 file a model may read in full, so keep each li
 
 The front matter is for programs, the body for models.
 
-- Use ids from [TAXONOMY.md](taxonomy.md) in `camera`, `overlays` and `inferred`. For anything outside it, use `x-` ids.
+- Use ids from [taxonomy](taxonomy.md) in `camera`, `overlays` and `inferred`. For anything outside it, use `x-` ids.
 - If your tool does not judge how shots were made, leave `inferred` and `made_mix` out. Do not fill them with guesses.
 - Set `decided_by` to whoever made the final call. If a person corrected it, that is `human`, even though a model looked first.
 - `frames.sheet` is the most useful image: one picture with the first, middle and last frame of the shot, so a model can check a shot from a single image.
@@ -136,4 +136,4 @@ Count the body of each file with any tokenizer, or with the one in the spec: ASC
 - Flags point at the shots that need a look.
 - Nothing private: no local paths, account names, API hosts or keys in any file, including L4 data.
 
-Add your tool to [IMPLEMENTATIONS.md](implementations.md).
+Add your tool to [implementations](implementations.md).

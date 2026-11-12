@@ -1,6 +1,6 @@
 # Taxonomy
 
-The standard ids used in VIDEO.md version 1. Ids outside these lists start with `x-` (see [SPEC.md](spec.md), section 9).
+The standard ids used in VIDEO.md version 1. Ids outside these lists start with `x-` (see [specification](spec.md), section 9).
 
 ## Production method
 
