@@ -259,7 +259,7 @@ pip install videomd
 videomd check path/to/package
 ```
 
-[conformance/](conformance/) has packages that conform and packages that each break one rule; an implementation of a validator SHOULD give the same results.
+[conformance/](https://github.com/videomd/videomd/tree/main/conformance/) has packages that conform and packages that each break one rule; an implementation of a validator SHOULD give the same results.
 
 ## 11. Versioning
 

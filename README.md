@@ -65,8 +65,8 @@ A full breakdown of one video runs to hundreds of thousands of tokens. A model t
 | [docs/design.md](docs/design.md) | Why it looks the way it does: what it borrows from Agent Skills and small DSLs |
 | [TAXONOMY.md](TAXONOMY.md) | Standard ids: production methods, camera, overlays, readers, flags |
 | [schema/](schema/videomd-1.schema.json) | JSON Schema for every front matter |
-| [examples/](examples/) | Complete packages |
-| [conformance/](conformance/) | Packages that conform, and packages that each break one rule |
+| [examples/](https://github.com/videomd/videomd/tree/main/examples/) | Complete packages |
+| [conformance/](https://github.com/videomd/videomd/tree/main/conformance/) | Packages that conform, and packages that each break one rule |
 | [IMPLEMENTATIONS.md](IMPLEMENTATIONS.md) | Tools that write or read VIDEO.md |
 
 ## Check and read a package
@@ -90,4 +90,4 @@ Proposals for fields, keys and taxonomy ids are welcome as issues; see [CONTRIBU
 
 ## License
 
-The specification and documents are under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The code, schema and conformance files are under [Apache-2.0](LICENSE).
+The specification and documents are under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The code, schema and conformance files are under [Apache-2.0](https://github.com/videomd/videomd/blob/main/LICENSE).

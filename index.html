@@ -1,0 +1,77 @@
+---
+home: true
+title: VIDEO.md — an open format for video breakdowns that models read layer by layer
+description: Every skill has a SKILL.md. Every video gets a VIDEO.md. A small card, a map, one line per shot, one file per shot.
+---
+<section class="hero">
+  <p class="eyebrow">Open format · version 1 draft</p>
+  <h1>Every skill has a <code>SKILL.md</code>.<br>Every video gets a <code>VIDEO.md</code>.</h1>
+  <p class="lede">VIDEO.md describes one video for AI agents and programs: what it shows and says, shot by shot, and how it was made. It starts with a small card and opens up level by level, so a model reads only what the question needs.</p>
+  <div class="actions">
+    <a class="btn primary" href="{{ '/SPEC.html' | relative_url }}">Read the spec</a>
+    <a class="btn" href="{{ '/docs/integrate.html' | relative_url }}">Use it in an agent</a>
+    <a class="btn" href="{{ '/docs/authoring.html' | relative_url }}">Write packages</a>
+  </div>
+  <pre class="install"><code>pip install videomd
+videomd check path/to/package</code></pre>
+</section>
+
+<section class="split">
+  <div>
+    <h2>A card first</h2>
+    <p>The front matter of <code>VIDEO.md</code> is all an agent needs to decide whether to open a package. Keep the cards of a whole library in context; open a package only when a question needs it.</p>
+<pre><code>---
+videomd: 1
+name: coffee-ad
+description: &gt;-
+  A 10-second coffee ad: a hand pours coffee
+  into a glass, then a card shows the price.
+  Filmed (70%) + code-rendered card (30%).
+source: {file: coffee-ad.mp4, sha256: 9f86d0…, duration: 10.0}
+shots: 2
+lang: en
+---</code></pre>
+  </div>
+  <div>
+    <h2>One line per shot</h2>
+    <p>The timeline is the spine of a package. A key ending in <code>~</code> is inferred; the others are seen or measured. Flags point at the shots that need a second look.</p>
+<pre><code>#01 0.0-7.0 | seen hand pours coffee into a glass
+  | camera handheld | made~ filmed 92%
+#02 7.0-10.0 | seen beige card with the price
+  | overlay title | made~ code render 61%
+  · runner-up screen capture 30%
+  | flag low confidence</code></pre>
+  </div>
+</section>
+
+<section>
+  <h2>Read only what the question needs</h2>
+  <ol class="levels">
+    <li><span class="lv">L0</span><div><b>Card</b> <span class="size">100–300 tokens</span><p>What the video is about, and whether to open it.</p></div></li>
+    <li><span class="lv">L1</span><div><b>Overview and map</b> <span class="size">1–2k</span><p>The verdict, the open questions, and every file with its size in tokens.</p></div></li>
+    <li><span class="lv">L2</span><div><b>Timeline and topics</b> <span class="size">a few thousand</span><p>One line per shot; sound, cast, packaging, remake each in their own file.</p></div></li>
+    <li><span class="lv">L3</span><div><b>One shot</b> <span class="size">hundreds + frames</span><p>What is seen, what is inferred and why, with images to check it.</p></div></li>
+    <li><span class="lv">L4</span><div><b>Raw data</b> <span class="size">any</span><p>For programs. A model does not need it.</p></div></li>
+  </ol>
+</section>
+
+<section class="grid">
+  <div><h3>Many videos in context</h3><p>Cards cost a few hundred tokens each, as skills do. An agent can know a whole library and still answer from a few thousand tokens.</p></div>
+  <div><h3>Seen apart from inferred</h3><p>In the syntax (<code>made~</code>) and in the data (<code>inferred</code>, with a probability and who decided). Guesses are not passed on as facts.</p></div>
+  <div><h3>Cost before reading</h3><p>Every file states its size in tokens, so a model can decide what is worth opening.</p></div>
+  <div><h3>A stable surface for programs</h3><p>Front matter with a JSON Schema, a small line grammar, fixed ids. Unknown fields are ignored, so the format can grow.</p></div>
+  <div><h3>Starts small</h3><p>Six fields make a valid card. Judging how a video was made is an optional module.</p></div>
+  <div><h3>Plain files</h3><p>A package is a folder of Markdown. Copy it, zip it, commit it, read it without any tool.</p></div>
+</section>
+
+<section class="more">
+  <h2>Go further</h2>
+  <ul class="cards">
+    <li><a href="{{ '/SPEC.html' | relative_url }}"><b>Specification</b><span>Layout, card, map, timeline, shot files, conformance.</span></a></li>
+    <li><a href="{{ '/docs/integrate.html' | relative_url }}"><b>Integrate</b><span>Discovery, context, loading, honest answers.</span></a></li>
+    <li><a href="{{ '/docs/authoring.html' | relative_url }}"><b>Authoring</b><span>From the smallest valid package to a full one.</span></a></li>
+    <li><a href="{{ '/docs/design.html' | relative_url }}"><b>Design</b><span>What it borrows from Agent Skills and small DSLs, and why.</span></a></li>
+    <li><a href="{{ '/TAXONOMY.html' | relative_url }}"><b>Taxonomy</b><span>Standard ids for methods, camera, overlays, readers, flags.</span></a></li>
+    <li><a href="https://github.com/videomd/videomd/tree/main/examples"><b>Examples</b><span>Complete packages, and conformance cases.</span></a></li>
+  </ul>
+</section>

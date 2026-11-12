@@ -1,0 +1,7 @@
+# one entry per page: English and Chinese paths (relative to the site root) and labels
+- {en: "", zh: "zh/", en_label: Overview, zh_label: 概览}
+- {en: SPEC.html, zh: i18n/SPEC_zh.html, en_label: Specification, zh_label: 规范}
+- {en: docs/integrate.html, zh: i18n/integrate_zh.html, en_label: Integrate, zh_label: 接入}
+- {en: docs/authoring.html, zh: i18n/authoring_zh.html, en_label: Authoring, zh_label: 生成}
+- {en: docs/design.html, zh: i18n/design_zh.html, en_label: Design, zh_label: 设计}
+- {en: TAXONOMY.html, zh: TAXONOMY.html, en_label: Taxonomy, zh_label: 取值表}

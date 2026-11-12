@@ -12,4 +12,4 @@ Tools that write or read VIDEO.md packages. To add yours, open a pull request wi
 
 | Tool | Notes |
 |---|---|
-| [videomd](src/videomd/) (this repository) | Reference reader and validator: `videomd check`, `videomd read`. |
+| [videomd](https://github.com/videomd/videomd/tree/main/src/videomd/) (this repository) | Reference reader and validator: `videomd check`, `videomd read`. |

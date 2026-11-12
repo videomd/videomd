@@ -1,0 +1,40 @@
+title: VIDEO.md
+description: An open format for video breakdowns that models read layer by layer.
+url: https://videomd.github.io
+baseurl: /videomd
+lang: en
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-titles-from-headings
+  - jekyll-seo-tag
+
+relative_links:
+  enabled: true
+  collections: false
+optional_front_matter:
+  remove_originals: true
+titles_from_headings:
+  enabled: true
+  strip_title: false
+
+defaults:
+  - scope: {path: ""}
+    values: {layout: default}
+
+exclude:
+  - examples
+  - conformance
+  - src
+  - tests
+  - dist
+  - .venv
+  - pyproject.toml
+  - "*.egg-info"

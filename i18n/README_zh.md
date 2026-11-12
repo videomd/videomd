@@ -67,8 +67,8 @@ lang: zh
 | [design_zh.md](design_zh.md) | 为什么这样设计：借鉴了 Agent Skills 和小型 DSL 的哪些做法 |
 | [TAXONOMY.md](../TAXONOMY.md) | 标准 id：制作方式、运镜、叠加层、判断来源、标记 |
 | [schema/](../schema/videomd-1.schema.json) | 所有前置信息的 JSON Schema |
-| [examples/](../examples/) | 完整的拆片包 |
-| [conformance/](../conformance/) | 合格的包，以及各违反一条规则的包 |
+| [examples/](https://github.com/videomd/videomd/tree/main/examples/) | 完整的拆片包 |
+| [conformance/](https://github.com/videomd/videomd/tree/main/conformance/) | 合格的包，以及各违反一条规则的包 |
 | [IMPLEMENTATIONS.md](../IMPLEMENTATIONS.md) | 生成和读取 VIDEO.md 的工具 |
 
 ## 检查和读取一个包
@@ -92,4 +92,4 @@ pkg = videomd.read("path/to/package")   # {"card": {...}, "map": [...], "timelin
 
 ## 许可
 
-规范和文档使用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)，代码、schema 和一致性测试文件使用 [Apache-2.0](../LICENSE)。
+规范和文档使用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)，代码、schema 和一致性测试文件使用 [Apache-2.0](https://github.com/videomd/videomd/blob/main/LICENSE)。

@@ -4,7 +4,7 @@
 
 ## 最小的拆片包
 
-四个文件。[conformance/valid/minimal](../conformance/valid/minimal/) 就是这个包。
+四个文件。[conformance/valid/minimal](https://github.com/videomd/videomd/tree/main/conformance/valid/minimal/) 就是这个包。
 
 `VIDEO.md`：
 

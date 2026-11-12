@@ -261,7 +261,7 @@ pip install videomd
 videomd check path/to/package
 ```
 
-[conformance/](../conformance/) 里有合格的包，以及各违反一条规则的包；校验器的实现应当给出相同的结果。
+[conformance/](https://github.com/videomd/videomd/tree/main/conformance/) 里有合格的包，以及各违反一条规则的包；校验器的实现应当给出相同的结果。
 
 ## 11. 版本
 

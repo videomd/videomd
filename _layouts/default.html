@@ -1,0 +1,46 @@
+<!doctype html>
+{%- assign zh = false -%}
+{%- if page.url contains '/i18n/' or page.url contains '/zh/' or page.lang == 'zh' -%}{%- assign zh = true -%}{%- endif -%}
+{%- assign here = page.url | remove_first: '/' | replace: 'index.html', '' -%}
+{%- assign twin = nil -%}
+{%- for item in site.data.nav -%}
+  {%- if item.en == here -%}{%- assign twin = item.zh -%}{%- endif -%}
+  {%- if item.zh == here -%}{%- assign twin = item.en -%}{%- endif -%}
+{%- endfor -%}
+{%- if twin == nil -%}{%- if zh -%}{%- assign twin = '' -%}{%- else -%}{%- assign twin = 'zh/' -%}{%- endif -%}{%- endif -%}
+<html lang="{% if zh %}zh-CN{% else %}en{% endif %}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% seo %}
+  <link rel="icon" href="{{ '/assets/icon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+</head>
+<body class="{% if page.home %}home{% else %}doc{% endif %}">
+  <header class="top">
+    <div class="bar">
+      <a class="brand" href="{% if zh %}{{ '/zh/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}"><span class="mark">▶</span>VIDEO.md</a>
+      <input type="checkbox" id="menu" class="menu-toggle" aria-label="Menu">
+      <label for="menu" class="menu-button" aria-hidden="true">☰</label>
+      <nav class="links">
+        {%- for item in site.data.nav offset: 1 -%}
+          {%- if zh -%}{%- assign href = item.zh -%}{%- assign label = item.zh_label -%}{%- else -%}{%- assign href = item.en -%}{%- assign label = item.en_label -%}{%- endif -%}
+          <a href="{{ '/' | append: href | relative_url }}"{% if href == here %} class="on"{% endif %}>{{ label }}</a>
+        {%- endfor -%}
+        <a class="lang" href="{{ '/' | append: twin | relative_url }}">{% if zh %}English{% else %}中文{% endif %}</a>
+        <a class="gh" href="https://github.com/videomd/videomd">GitHub</a>
+      </nav>
+    </div>
+  </header>
+  <main class="{% if page.home %}landing{% else %}prose{% endif %}">
+    {{ content }}
+  </main>
+  <footer class="foot">
+    <div class="bar">
+      <span>VIDEO.md · {% if zh %}第 1 版草案{% else %}version 1 draft{% endif %}</span>
+      <span>{% if zh %}规范和文档：CC BY 4.0 · 代码：Apache-2.0{% else %}Spec and docs: CC BY 4.0 · Code: Apache-2.0{% endif %}</span>
+      <a href="https://github.com/videomd/videomd/edit/main/{{ page.path }}">{% if zh %}在 GitHub 上编辑本页{% else %}Edit this page on GitHub{% endif %}</a>
+    </div>
+  </footer>
+</body>
+</html>

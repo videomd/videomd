@@ -4,7 +4,7 @@ This guide is for people building tools that break videos down, and for anyone w
 
 ## The smallest package
 
-Four files. [conformance/valid/minimal](../conformance/valid/minimal/) is this package.
+Four files. [conformance/valid/minimal](https://github.com/videomd/videomd/tree/main/conformance/valid/minimal/) is this package.
 
 `VIDEO.md`:
 

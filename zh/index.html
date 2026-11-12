@@ -1,0 +1,78 @@
+---
+home: true
+lang: zh
+title: VIDEO.md — 给模型逐层读的视频拆解开放格式
+description: 每个技能有一个 SKILL.md，每条视频也有一个 VIDEO.md。一张卡片、一张地图、一行一个镜头、一镜一个文件。
+---
+<section class="hero">
+  <p class="eyebrow">开放格式 · 第 1 版草案</p>
+  <h1>每个技能有一个 <code>SKILL.md</code>，<br>每条视频也有一个 <code>VIDEO.md</code>。</h1>
+  <p class="lede">VIDEO.md 给 AI agent 和程序描述一条视频：逐镜讲了什么、画面里有什么、每一镜是怎么做的。它从一张小卡片开始逐层展开，模型只读问题需要的那一层。卡片是这条视频的身份证，整个包是它的档案。</p>
+  <div class="actions">
+    <a class="btn primary" href="{{ '/i18n/SPEC_zh.html' | relative_url }}">读规范</a>
+    <a class="btn" href="{{ '/i18n/integrate_zh.html' | relative_url }}">接入 agent</a>
+    <a class="btn" href="{{ '/i18n/authoring_zh.html' | relative_url }}">生成拆片包</a>
+  </div>
+  <pre class="install"><code>pip install videomd
+videomd check path/to/package</code></pre>
+</section>
+
+<section class="split">
+  <div>
+    <h2>先看卡片</h2>
+    <p><code>VIDEO.md</code> 的前置信息就是卡片，agent 只看它就能决定要不要打开这个包。整个视频库的卡片都可以常驻上下文，问题需要时才打开某个包。</p>
+<pre><code>---
+videomd: 1
+name: coffee-ad
+description: &gt;-
+  一条 10 秒的咖啡广告：一只手往玻璃杯里
+  倒咖啡，然后一张卡片显示价格。
+  实拍（70%）+ 代码渲染的价格卡（30%）。
+source: {file: coffee-ad.mp4, sha256: 9f86d0…, duration: 10.0}
+shots: 2
+lang: zh
+---</code></pre>
+  </div>
+  <div>
+    <h2>一行一个镜头</h2>
+    <p>时间线是整个包的主干。键名带 <code>~</code> 的是推断，不带的是看到的或测得的。<code>flag</code> 标出需要复核的镜头。</p>
+<pre><code>#01 0.0-7.0 | seen 一只手往玻璃杯里倒咖啡
+  | camera 手持 | made~ 实拍 92%
+#02 7.0-10.0 | seen 米色卡片上写着价格
+  | overlay 标题 | made~ 代码渲染 61%
+  · 次选 录屏 30%
+  | flag 低置信</code></pre>
+  </div>
+</section>
+
+<section>
+  <h2>问题需要多少，就读多少</h2>
+  <ol class="levels">
+    <li><span class="lv">L0</span><div><b>卡片</b> <span class="size">100–300 token</span><p>这条视频讲什么，值不值得打开。</p></div></li>
+    <li><span class="lv">L1</span><div><b>概览和地图</b> <span class="size">1–2k</span><p>结论、不确定点，以及每个文件和它的 token 数。</p></div></li>
+    <li><span class="lv">L2</span><div><b>时间线和主题</b> <span class="size">几千</span><p>一行一个镜头；声音、角色、包装、复刻各一个文件。</p></div></li>
+    <li><span class="lv">L3</span><div><b>单个镜头</b> <span class="size">几百 + 帧图</span><p>看到的、推断的和依据，附截图可以核实。</p></div></li>
+    <li><span class="lv">L4</span><div><b>原始数据</b> <span class="size">不限</span><p>给程序用，模型不需要读。</p></div></li>
+  </ol>
+</section>
+
+<section class="grid">
+  <div><h3>上下文里放得下很多视频</h3><p>每张卡片几百 token，和技能一样。agent 可以知道整个视频库，回答问题时也只用几千 token。</p></div>
+  <div><h3>看到的和推断的分开</h3><p>语法里分（<code>made~</code>），数据里也分（<code>inferred</code>，附概率和由谁判定）。猜测不会被当成事实转述。</p></div>
+  <div><h3>读之前就知道代价</h3><p>每个文件都写明自己有多少 token，模型自己判断值不值得打开。</p></div>
+  <div><h3>程序有稳定的接口</h3><p>前置信息有 JSON Schema，时间线有固定语法，取值是固定 id。不认识的字段一律忽略，格式可以持续扩展。</p></div>
+  <div><h3>门槛低</h3><p>6 个字段就是一张合格的卡片。判断制作方式是可选模块。</p></div>
+  <div><h3>就是普通文件</h3><p>一个包就是一个 Markdown 文件夹。可以复制、压缩、提交到 git，不装任何工具也能读。</p></div>
+</section>
+
+<section class="more">
+  <h2>继续了解</h2>
+  <ul class="cards">
+    <li><a href="{{ '/i18n/SPEC_zh.html' | relative_url }}"><b>规范</b><span>目录、卡片、地图、时间线、镜头文件、一致性要求。</span></a></li>
+    <li><a href="{{ '/i18n/integrate_zh.html' | relative_url }}"><b>接入指南</b><span>发现、上下文、按需加载、如实回答。</span></a></li>
+    <li><a href="{{ '/i18n/authoring_zh.html' | relative_url }}"><b>生成指南</b><span>从最小的合格包到完整的包。</span></a></li>
+    <li><a href="{{ '/i18n/design_zh.html' | relative_url }}"><b>设计思路</b><span>借鉴了 Agent Skills 和小型 DSL 的哪些做法，为什么。</span></a></li>
+    <li><a href="{{ '/TAXONOMY.html' | relative_url }}"><b>取值表</b><span>制作方式、运镜、叠加层、判断来源、标记的标准 id。</span></a></li>
+    <li><a href="https://github.com/videomd/videomd/tree/main/examples"><b>示例</b><span>完整的拆片包和一致性测试用例。</span></a></li>
+  </ul>
+</section>
